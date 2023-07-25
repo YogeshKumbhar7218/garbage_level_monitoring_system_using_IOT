@@ -46,4 +46,6 @@ Scripts/
 
 
 # Secrets
-secrets.json
+secrets.json 
+
+/.vscode
