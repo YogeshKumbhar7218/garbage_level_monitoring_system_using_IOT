@@ -1,0 +1,54 @@
+{% extends "admins/base.html" %}
+
+{% block content %}
+{% load static %}
+<script src="{% static 'js/admin_dashboard_ajax.js' %}"></script>
+<link rel="stylesheet" href={% static 'css/bins.css' %} />
+<div class="cards">
+    <div class="container">
+        {% for bin in my_bins %}
+        <div class="card" id="{{ bin.id }}">
+            <div class="face face1">
+                <div class="content">
+                    <span class="stars"></span>
+
+                    <div class="java" style="font-size: 1.4em;line-height:2rem;">
+                        <a href="/map_location/{{ bin.id }}/">
+                            <h6 style="line-height:2rem;">location : {{ bin.location }}</h6>
+                        </a>
+
+                        <h6 style="line-height:2rem;">Under Employee : {{ bin.name }}</h6>
+                        <h6 style="line-height:2rem;" class="dry">dry filled : {{ bin.dry_filled }}%
+                        </h6>
+                        <h6 style="line-height:2rem;" class="wet">wet filled : {{ bin.wet_filled }}%
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            {% if bin.dry_filled > bin.wet_filled %}
+            {% if bin.dry_filled > 75 %}
+            <div class="face face2" style="background: linear-gradient(to top, red {{ bin.dry_filled }}%, white 0%);">
+                {% else %}
+                <div class="face face2"
+                    style="background: linear-gradient(to top, green {{ bin.dry_filled }}%, white 0%);">
+                    {% endif %}
+                    {% else %}
+                    {% if bin.wet_filled > 75 %}
+                    <div class="face face2"
+                        style="background: linear-gradient(to top, red {{ bin.wet_filled }}%, white 0%);">
+                        {% else %}
+                        <div class="face face2"
+                            style="background: linear-gradient(to top, green {{ bin.wet_filled }}%, white 0%);">
+                            {% endif %}
+                            {% endif %}
+
+                            <h2 style="background-image: url({% static 'img/dustbin.png' %});">0{{bin.bin_number}}</h2>
+                        </div>
+                    </div>
+                    {% endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

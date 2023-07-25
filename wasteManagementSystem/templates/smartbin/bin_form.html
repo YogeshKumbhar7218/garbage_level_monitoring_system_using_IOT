@@ -1,0 +1,28 @@
+<!-- form to fill data into the dustbin table manually -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method="post" action="/smartbin/">
+        {% csrf_token %}
+        <label for="bin_number">Smartbin number</label>
+        <input type="number" name="bin_number"><br>
+
+        <label for="dry_filled">Drybin distance</label>
+        <input type="number" name="dry_filled"><br>
+
+        <label for="wet_filled">Wetbin distance</label>
+        <input type="number" name="wet_filled"><br>
+        <input type="submit" value="Send">
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+{% load static %}
+<style>
+    #servererror {
+        text-align: center;
+        border: 2px solid red;
+        border-radius: 4px;
+        background-color: white;
+
+    }
+
+    .formcss {
+        background-color: whitesmoke;
+        padding-top: 48px;
+        padding-bottom: 48px;
+        border-radius: 10px;
+
+    }
+
+    .inner_container {
+        margin-top: 40px;
+
+    }
+
+    body {
+        background: linear-gradient(to right, #6666ff 15%, #cc33ff 64%);
+    }
+</style>
+
+<form id="addDustbin" method="POST" action="/admin_edit_smartbin/{{ smartbin.id }}/">
+    {% csrf_token %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="formcss container inner_container">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <p id="servererror"> </p>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label for="">Smartbin Number</label>
+                            <input min="1" max="10000" name="bin_number" type="number" class="form-control"
+                                value="{{ smartbin.bin_number }}" required>
+                        </div>
+                        <div class="col-sm-5">
+                            <label for="">Dustbin Height(cm)</label>
+                            <input min="10" max="1000" name="height" type="number" class="form-control"
+                                value="{{ smartbin.height }}" required>
+                            <br>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="inputState">Under Employee</label>
+                            <select name="under_employee" id="inputState" class="form-control" required>
+                                {% for employee in employees %}
+
+                                <option value="{{ employee.id }}">{{ employee.name }}</option>
+
+
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Address</label>
+                            <input minlength="6" name="location" type="text" class="form-control"
+                                value="{{ smartbin.location }}" required>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Map Co-ordinates</label>
+                            <input name="map_location" type="text" class="form-control"
+                                value="{{ smartbin.map_location }}">
+                        </div>
+                        <div class=" col-sm-1">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input id="submitbtn" type="submit" class="btn btn-info" value="ADD">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+</form>
+
+<script src="{% static 'js/admin_edit_smartbin_jquery.js'%}"></script>

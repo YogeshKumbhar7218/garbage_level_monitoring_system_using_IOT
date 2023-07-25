@@ -1,0 +1,58 @@
+<style>
+    .formcss {
+        background-color: whitesmoke;
+        padding-top: 48px;
+        padding-bottom: 48px;
+        border-radius: 10px;
+
+    }
+
+    .inner_container {
+        margin-top: 40px;
+
+    }
+
+    body {
+        background: linear-gradient(to right, #6666ff 15%, #cc33ff 64%);
+    }
+</style>
+<form id="myForm" method="POST" action="/user_feedback/" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="formcss container inner_container">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Please write your feedback here!</label>
+                            <textarea name="feedback" id="feedback" rows="6" class="form-control"
+                                required></textarea><br>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Upload a picture</label>
+                            {{ form.photo }}<br>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input id="submitbtn" type="submit" class="btn btn-info" value="Submit">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+</form>

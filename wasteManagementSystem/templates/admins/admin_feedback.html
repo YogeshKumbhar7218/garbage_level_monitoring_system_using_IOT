@@ -1,0 +1,86 @@
+{% load static %}
+<style>
+    .card_container {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        overflow: auto;
+    }
+
+    .time {
+        font-size: .9rem;
+    }
+
+    .content {
+        font-size: .9rem;
+    }
+
+    #servererror {
+        text-align: center;
+        border: 2px solid red;
+        border-radius: 4px;
+        background-color: #fc74747b;
+
+    }
+
+    .invalid {
+        color: red;
+        font-size: .8rem;
+    }
+
+    .formcss {
+        background-color: whitesmoke;
+        padding-top: 48px;
+        padding-bottom: 48px;
+        border-radius: 10px;
+
+    }
+
+    .inner_container {
+        margin-top: 40px;
+
+    }
+
+    form {
+        display: inline;
+        float: right;
+    }
+
+    body {
+        background: linear-gradient(to right, #6666ff 15%, #cc33ff 64%);
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            {% for feedback in feedbacks %}
+            <div class="card card_container">
+                <div class="card-header time">
+                    {{ feedback.time }}
+                    <span>
+                        <form action="/remove_feedback/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ feedback.id }}" name="id">
+                            <input type="submit" class="btn btn-danger btndelete" value="Delete">
+                        </form>
+                    </span>
+                </div>
+                <div class="card-body content">
+                    <blockquote class="blockquote mb-0">
+                        <p class="content">{{ feedback.feedback }}</p>
+
+                        <img src="{{feedback.photo.url}}" alt="" height="200px">
+                        <footer class="blockquote-footer content">({{feedback.username}}) <cite title="Source Title">
+                                {{feedback.name}}</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+            {% endfor%}
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+<script src="{% static 'js/admin_feedback_jquery.js'%}"></script>

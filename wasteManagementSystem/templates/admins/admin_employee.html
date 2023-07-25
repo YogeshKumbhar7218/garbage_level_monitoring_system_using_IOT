@@ -1,0 +1,70 @@
+{% load static %}
+<style>
+    body {
+        background: linear-gradient(to right, #6666ff 15%, #cc33ff 64%);
+    }
+
+    .table {
+        background-color: white;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h4>Employee Details
+                        <a id="new_employee" href="/add_employee/" class="btn btn-primary float-end">ADD NEW</a>
+                    </h4>
+
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email ID</th>
+                                <th>Contact</th>
+                                <th>address</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for employee in employees %}
+                            <tr>
+                                <td>
+                                    {{ employee.id }}
+                                </td>
+                                <td>
+                                    {{ employee.name }}
+                                </td>
+                                <td>
+                                    {{ employee.email }}
+                                </td>
+                                <td>
+                                    {{ employee.contact }}
+                                </td>
+                                <td>
+                                    {{ employee.address }}
+                                </td>
+                                <td>
+                                    <a href="/admin_edit_employee/{{ employee.id }}/"
+                                        class=" edit_employee btn btn-success">Edit</a>
+                                </td>
+                                <td>
+                                    <a href="/adminRemoveEmployee/{{ employee.id }}/"
+                                        class="emp_remove btn btn-danger ">Remove</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/admin_employee_jquery.js'%}"></script>

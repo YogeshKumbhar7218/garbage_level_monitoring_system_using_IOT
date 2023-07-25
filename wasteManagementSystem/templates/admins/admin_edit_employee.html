@@ -1,0 +1,130 @@
+{% load static %}
+
+<style>
+    #servererror {
+        text-align: center;
+        border: 2px solid red;
+        border-radius: 4px;
+        background-color: white;
+
+    }
+
+    .invalid {
+        color: red;
+        font-size: .8rem;
+    }
+
+    .formcss {
+        background-color: whitesmoke;
+        padding-top: 48px;
+        padding-bottom: 48px;
+        border-radius: 10px;
+
+    }
+
+    .inner_container {
+        margin-top: 40px;
+
+    }
+
+    body {
+        background: linear-gradient(to right, #6666ff 15%, #cc33ff 64%);
+    }
+</style>
+
+<form id="myForm" method="POST" action="/admin_edit_employee/{{ employee.id }}/">
+
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="formcss container inner_container">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <p id="servererror"> </p>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Full Name</label>
+                            <input id="name" name="name" type="text" class="form-control" value="{{ employee.name }}">
+                            <p class="invalid" id="namecheck">must contian alphabets more than 5(spaces are not allowed
+                                at start and
+                                end) </p>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Email</label>
+                            <input id="email" name="email" type="email" class="form-control"
+                                value="{{ employee.email }}">
+                            <!-- <p id="emailcheck">must be a valid address, e.g. me@mydomain.com</p> -->
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Phone Number</label>
+                            <input maxlength="10" id="contact" name="contact" type="text" class="form-control"
+                                value="{{ employee.contact }}">
+                            <p class="invalid" id="contactcheck">must be a valid Indian phone number(10 digits)</p>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Address</label>
+                            <input id="address" name="address" type="text" class="form-control"
+                                value="{{ employee.address }}">
+                            <p class="invalid" id="addresscheck">must be alphanumeric and spaces are not allowed at
+                                start and end</p>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Username</label>
+                            <input id="usernames" name="username" type="text" class="form-control"
+                                value="{{ employee.username }}">
+                            <p class="invalid" id="usercheck">must be alphanumeric and contain 5 - 12 characters</p>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label for="">Password</label>
+                            <input id="password" name="password" type="password" class="form-control"
+                                value="{{ employee.password }}">
+                            <p class="invalid" id="passcheck">must alphanumeric (@, _ and - are also allowed) and be
+                                5-20
+                                characters</p>
+                            <br>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input id="submitbtn" type="submit" class="btn btn-info" value="UPDATE">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+</form>
+
+<script src="{% static 'js/admin_edit_employee_jquery.js' %}"></script>
